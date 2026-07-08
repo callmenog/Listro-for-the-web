@@ -1,0 +1,44 @@
+Listro OS for the Web (Beta)
+Experience Listro OS directly from your browser.
+
+No downloads. No virtual machine. No installation.
+
+Listro OS for the Web is a browser-based version of the Arch Linux powered Listro OS, designed to let anyone explore the operating system instantly. It has been stripped down to meet the limitations of running inside a web browser while still preserving the core Linux experience, including essential utilities such as the terminal and other basic system tools.
+
+⚠️ Beta Software
+
+This project is currently in beta and is intended for testing and demonstration purposes. Many features are incomplete, experimental, or unavailable due to both browser limitations and the fact that Listro OS itself is still in extremely early development.
+
+Features
+🌐 Runs entirely in your web browser
+⚡ No download or installation required
+🐧 Arch Linux based environment
+💻 Functional Linux terminal
+📁 Basic filesystem support
+🧪 Easy way to preview and test Listro OS
+Limitations
+Because this project runs inside a web browser, some functionality available in the full operating system cannot be replicated. Depending on your browser and device, you may experience limitations such as:
+
+Limited hardware access
+Restricted filesystem capabilities
+Reduced performance compared to native installation
+Some packages or applications may not function correctly
+Certain features are still under development or not yet implemented
+These limitations are expected and will improve as both the web environment and Listro OS continue to evolve.
+
+Project Status
+Development Stage: Early Beta
+
+Listro OS for the Web is actively being developed alongside the main Listro OS project. Expect frequent changes, bugs, missing features, and breaking updates as development progresses.
+
+Feedback, bug reports, and suggestions are always welcome.
+
+Purpose
+The goal of this project is to make trying Listro OS as simple as opening a website.
+
+Whether you're curious about the operating system, testing features, or simply exploring Linux, Listro OS for the Web provides a quick and accessible way to experience the project without modifying your computer.
+
+Disclaimer
+This web version is not intended to replace the full operating system. It serves as a lightweight preview of the Listro OS experience and should be viewed as an experimental environment.
+
+Made with ❤️ for the open-source community.
