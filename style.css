@@ -55,7 +55,7 @@ body{
   /* EDIT HERE — WALLPAPER: swap wallpaper.png for any image in this folder.
      background-size:cover + center keeps it filling the screen at any
      window size without distorting it. */
-  background-image: url("wallpaper.png");
+  background-image: url("Listro\wp.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
