@@ -1,7 +1,3 @@
-/* ===========================================================================
-   ICONS
-   Small inline-SVG icon set (kept monochrome/flat to match Breeze style).
-   =========================================================================== */
 const ICONS = {
   terminal: `<svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="18" rx="2" fill="#151719" stroke="#4d4d4d"/><path d="M6 8l4 4-4 4" stroke="#3daee9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="16" x2="18" y2="16" stroke="#eff0f1" stroke-width="2" stroke-linecap="round"/></svg>`,
   folder: `<svg viewBox="0 0 24 24"><path d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6z" fill="#3daee9"/><path d="M3 8h18v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8z" fill="#5fbfef"/></svg>`,
@@ -11,13 +7,6 @@ const ICONS = {
   about: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#3daee9"/><rect x="11" y="10" width="2" height="7" rx="1" fill="#fff"/><rect x="11" y="6.5" width="2" height="2" rx="1" fill="#fff"/></svg>`
 };
 
-/* ===========================================================================
-   EDIT HERE #4 — FAKE FILE SYSTEM
-   This object is the single "disk" shared by both the Terminal and Dolphin.
-   Add/rename folders and files here to change what's pre-installed.
-   type: "folder" -> has `children` (object keyed by name)
-   type: "file"   -> has `content` (string shown in the text editor)
-   =========================================================================== */
 const FS = {
   type: "folder",
   children: {
@@ -39,7 +28,6 @@ const FS = {
   }
 };
 
-/* Helpers to walk the FS tree using a path array, e.g. ["Home","Documents"] */
 function fsGet(path){
   let node = FS;
   for(const seg of path){
@@ -50,13 +38,6 @@ function fsGet(path){
 }
 function fsPathStr(path){ return "/" + path.join("/"); }
 
-/* ===========================================================================
-   EDIT HERE #5 — APP REGISTRY
-   Every app on the desktop / start menu / taskbar comes from this list.
-   To add a new app: add an entry here with an id, name, icon and a
-   `launch()` function that returns HTML (or attaches behavior) for the
-   window body. To remove an app, delete its entry.
-   =========================================================================== */
 const APPS = [
   {
     id: "terminal",
@@ -88,10 +69,6 @@ const APPS = [
   }
 ];
 
-/* ===========================================================================
-   WINDOW MANAGER
-   Generic create/drag/focus/close logic used by every app above.
-   =========================================================================== */
 const winContainer = document.getElementById("windows-container");
 const taskList = document.getElementById("task-list");
 let zTop = 10;
@@ -126,7 +103,6 @@ function createWindow(app, extraTitle){
   const body = winEl.querySelector(".window-body");
   const titleTextEl = winEl.querySelector(".title-text");
 
-  // taskbar entry ----------------------------------------------------------
   const taskBtn = document.createElement("div");
   taskBtn.className = "task-btn focused";
   taskBtn.innerHTML = `${app.icon}<span>${app.name}</span>`;
@@ -145,7 +121,6 @@ function createWindow(app, extraTitle){
     focus();
   });
 
-  // dragging -----------------------------------------------------------------
   titlebar.addEventListener("mousedown", (e)=>{
     if(e.target.closest(".win-btn")) return;
     const startX = e.clientX, startY = e.clientY;
@@ -159,7 +134,6 @@ function createWindow(app, extraTitle){
     document.addEventListener("mouseup", onUp);
   });
 
-  // resizing -------------------------------------------------------------------
   const handle = winEl.querySelector(".resize-handle");
   handle.addEventListener("mousedown", (e)=>{
     e.stopPropagation();
@@ -174,7 +148,6 @@ function createWindow(app, extraTitle){
     document.addEventListener("mouseup", onUp);
   });
 
-  // window control buttons ------------------------------------------------------
   winEl.querySelector(".close").addEventListener("click", ()=>{
     winEl.remove(); taskBtn.remove();
   });
@@ -198,16 +171,6 @@ function createWindow(app, extraTitle){
   return winEl;
 }
 
-/* ===========================================================================
-   TERMINAL APP
-   EDIT HERE #6 — add new shell commands inside the COMMANDS object.
-   Each command receives `args` (the words typed after the command name)
-   and returns the string to print, or null to print nothing.
-   =========================================================================== */
-
-/* Recursively walks the FS tree, calling onFile(path[], name, node) for
-   every file and onFolder(path[], name, node) for every folder.
-   Used by find / tree / du / grep so they don't need their own walkers. */
 function fsWalk(startPath, onFolder, onFile){
   function walk(path){
     const node = fsGet(path);
@@ -233,7 +196,7 @@ function initTerminal(body){
   const input = body.querySelector("#term-input");
   const promptEl = body.querySelector("#term-prompt");
   let cwd = ["Home"];
-  let cmdHistory = [];     // typed commands, for the up/down arrow recall
+  let cmdHistory = [];     
   let historyPos = 0;
 
   function printLine(text){
@@ -247,7 +210,6 @@ function initTerminal(body){
     promptEl.textContent = `listro@web:~${cwd.length>1 ? "/"+cwd.slice(1).join("/") : ""}$`;
   }
 
-  /* Short man-page style blurbs shown by `man <command>` */
   const MANUAL = {
     ls:"ls [dir] — list files and folders in the current (or given) directory.",
     cd:"cd <dir> — change directory. 'cd ..' goes up one level, 'cd' alone goes home.",
@@ -305,12 +267,14 @@ function initTerminal(body){
     ].join("\n"),
 
     neofetch: ()=> [
-      "        /\\        listro@web",
-      "       /  \\       -----------",
-      "      / /\\ \\      OS: Listro OS 1.0 (web preview)",
-      "     / ____ \\     DE: KDE Plasma (minimal)",
-      "    /_/    \\_\\    Shell: listro-sh",
-      "                  Apps: Terminal, Dolphin, Text Editor"
+                  /\
+                //  \\ 
+      "        //    \\        listro@web",
+      "       //   *  \\       -----------",
+      "      //  *  *  \\      OS: Listro OS 1.0 (web preview)",
+      "     //  *    *  \\     DE: KDE Plasma (minimal)",
+      "    //_ * ____ *_ \\    Shell: listro-sh",
+      "                        Apps: Terminal, Dolphin, Text Editor"
     ].join("\n"),
 
     ls: (args)=>{
